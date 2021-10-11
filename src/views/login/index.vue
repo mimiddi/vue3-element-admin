@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore, mapGetters } from 'vuex'
 
@@ -33,7 +33,13 @@ if (query) {
 }
 
 const allState = store.state
-// store.dispatch('test/setTestState', true)
+console.info(allState.test.testState)
+computed({...mapGetters(['testState'])})
+
+
+
+store.dispatch('test/setTestState', true)
+// const count = ref(0)
 // const computedState = computed({
 //   get: () => count.value + 1,
 //   set: val => {
@@ -41,13 +47,24 @@ const allState = store.state
 //   }
 // })
 
+const computedState = computed({
+  get: () => allState.test.testState + 1,
+  set: val => {
+    // allState.test.value = val - 1
+  }
+})
+
+
+// console.info(res)
+
 console.info(store.state.test.testState)
 </script>
 
 <template>
   <div>login</div>
   <!--<div @click="count++">{{ count }}</div>-->
-  <el-button>111</el-button>
+  <el-button>1112 {{ testState }} </el-button>
+  <div>{{ computedState }}</div>
 </template>
 
 <style scoped>
