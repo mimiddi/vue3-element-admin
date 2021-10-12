@@ -58,6 +58,11 @@ const computedState = computed({
 // console.info(res)
 
 console.info(store.state.test.testState)
+
+// login
+function login() {
+  console.info(111)
+}
 </script>
 
 <template>
@@ -65,6 +70,8 @@ console.info(store.state.test.testState)
   <!--<div @click="count++">{{ count }}</div>-->
   <el-button>1112 {{ testState }} </el-button>
   <div>{{ computedState }}</div>
+
+  <el-button @click="login">login</el-button>
 </template>
 
 <style scoped>
