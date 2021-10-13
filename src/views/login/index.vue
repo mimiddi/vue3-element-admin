@@ -3,6 +3,10 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore, mapGetters } from 'vuex'
 
+// import { login } from '@/api/user'
+// console.info(login)
+// login({ username: '13055257913', password: '123456' })
+
 const route = useRoute()
 const store = useStore()
 
@@ -72,6 +76,11 @@ function login() {
   <div>{{ computedState }}</div>
 
   <el-button @click="login">login</el-button>
+  <div class="a">
+    <div class="a2">a2</div>
+    <div class="b">1</div>
+  </div>
+  <svg-icon :icon-class="'alipay'" style="color: red;" />
 </template>
 
 <style scoped>

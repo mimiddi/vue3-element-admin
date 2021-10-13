@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// console.info(import.meta.env, 11111)
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: import.meta.env.VITE_VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 30000 // request timeout
 })
@@ -60,7 +60,7 @@ service.interceptors.response.use(
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
-        MessageBoxState.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+        ElMessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
           confirmButtonText: 'Re-Login',
           cancelButtonText: 'Cancel',
           type: 'warning'
@@ -77,16 +77,11 @@ service.interceptors.response.use(
   },
   error => {
     // console.log('err' + error) // for debug
-    Message({
+    ElMessage({
       message: error.message,
       type: 'error',
       duration: 5 * 1000
     })
-    if (/Request failed with status code 401/.test(error)) {
-      store.dispatch('user/resetToken').then(() => {
-        location.reload()
-      })
-    }
     return Promise.reject(error)
   }
 )
