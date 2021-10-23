@@ -1,78 +1,77 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStore, mapGetters } from 'vuex'
+  import {ref, computed} from 'vue'
+  import {useRoute} from 'vue-router'
+  import {useStore, mapGetters} from 'vuex'
 
-// import { login } from '@/api/user'
-// console.info(login)
-// login({ username: '13055257913', password: '123456' })
+  // import { login } from '@/api/user'
+  // console.info(login)
+  // login({ username: '13055257913', password: '123456' })
 
-const route = useRoute()
-const store = useStore()
+  const route = useRoute()
+  const store = useStore()
 
-const username = ref('')
-const password = ref('')
+  const username = ref('')
+  const password = ref('')
 
-/**
- * src/permission.js
- * 保存token失效返回login之前的path
- * 登录成功则跳转指定页面redirect
- */
-const { query } = route
-let redirect = undefined // 要跳转的页面
-let otherQuery = {} // 要跳转的页面参数
-if (query) {
-  redirect = query.redirect
-  otherQuery = getOtherQuery(query)
+  /**
+   * src/permission.js
+   * 保存token失效返回login之前的path
+   * 登录成功则跳转指定页面redirect
+   */
+  const {query} = route
+  let redirect = undefined // 要跳转的页面
+  let otherQuery = {} // 要跳转的页面参数
+  if (query) {
+    redirect = query.redirect
+    otherQuery = getOtherQuery(query)
 
-  // 提取其他参数
-  function getOtherQuery (query) {
-    return Object.keys(query).reduce((acc, cur) => {
-      if (cur !== 'redirect') {
-        acc[cur] = query[cur]
-      }
-      return acc
-    }, {})
+    // 提取其他参数
+    function getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
+    }
   }
-}
 
-const allState = store.state
-console.info(allState.test.testState)
-computed({...mapGetters(['testState'])})
-
+  const allState = store.state
+  console.info(allState.test.testState)
+  computed({...mapGetters(['testState'])})
 
 
-store.dispatch('test/setTestState', true)
-// const count = ref(0)
-// const computedState = computed({
-//   get: () => count.value + 1,
-//   set: val => {
-//     count.value = val - 1
-//   }
-// })
+  store.dispatch('test/setTestState', true)
+  // const count = ref(0)
+  // const computedState = computed({
+  //   get: () => count.value + 1,
+  //   set: val => {
+  //     count.value = val - 1
+  //   }
+  // })
 
-const computedState = computed({
-  get: () => allState.test.testState + 1,
-  set: val => {
-    // allState.test.value = val - 1
+  const computedState = computed({
+    get: () => allState.test.testState + 1,
+    set: val => {
+      // allState.test.value = val - 1
+    }
+  })
+
+
+  // console.info(res)
+
+  console.info(store.state.test.testState)
+
+  // login
+  function login() {
+    console.info(111)
   }
-})
-
-
-// console.info(res)
-
-console.info(store.state.test.testState)
-
-// login
-function login() {
-  console.info(111)
-}
 </script>
 
 <template>
   <div>login</div>
   <!--<div @click="count++">{{ count }}</div>-->
-  <el-button>1112 {{ testState }} </el-button>
+  <el-button>1112 {{ testState }}</el-button>
   <div>{{ computedState }}</div>
 
   <el-button @click="login">login</el-button>
@@ -80,7 +79,7 @@ function login() {
     <div class="a2">a2</div>
     <div class="b">1</div>
   </div>
-  <svg-icon :icon-class="'alipay'" style="color: red;" />
+  <svg-icon :icon-class="'404'" :color="'orange'"/>
 </template>
 
 <style scoped>
