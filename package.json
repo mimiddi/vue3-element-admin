@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.js"
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.js",
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
     "axios": "^0.22.0",
@@ -20,6 +21,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
+    "eslint": "^8.1.0",
+    "eslint-plugin-vue": "^7.20.0",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "svgo": "^2.7.0",
