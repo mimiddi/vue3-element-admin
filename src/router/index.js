@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Layout from '@/layout/index.vue'
 
 export const constantRoutes = [
   {
@@ -8,8 +9,24 @@ export const constantRoutes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
+    component: Layout,
+    // meta: { title: 'dashboard', icon: 'dashboard', affix: true },
+    // component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+    // name: 'Dashboard',
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+        name: 'Dashboard',
+        meta: { title: 'dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
   },
+  // {
+  //   path: '/dashboard',
+  //   name: 'Dashboard',
+  //   component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -26,9 +43,25 @@ export const constantRoutes = [
 ]
 
 export const asyncRoutes = [
+  {
+    path: '/dashboard2',
+    // name: 'Dashboard2',
+    component: Layout,
+    // meta: { title: 'dashboard', icon: 'dashboard', affix: true },
+    // component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+    // name: 'Dashboard',
+    children: [
+      {
+        path: 'dashboard2',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+        name: 'Dashboard2',
+        meta: { title: 'dashboard2', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
 
   // 匹配所有路径 /:pathMatch(.*)* 或 /:pathMatch(.*) 或 /:catchAll(.*)
-  { path: '/:pathMatch(.*)*', redirect: '/404', name: 'Page404', hidden: true }
+  // { path: '/:pathMatch(.*)*', redirect: '/404', name: 'Page404', hidden: true }
 ]
 
 const router = createRouter({

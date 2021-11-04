@@ -1,13 +1,17 @@
-import router from './router'
+import router from '@/router'
+import store from '@/store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { ElMessage } from 'element-plus'
+import getPageTitle from '@/utils/get-page-title'
 // import { getToken } from '@/utils/auth' // get token from cookie
 
 const whiteList = ['/login', '/404']
-const hasToken = false
+const hasToken = true
 
-router.beforeEach(async(to, from) => {
+router.beforeEach(async (to, from) => {
+  document.title = getPageTitle(!!to.meta && to.meta.title)
+
   // start progress bar
   NProgress.start()
   // console.info(to, from)
@@ -17,12 +21,18 @@ router.beforeEach(async(to, from) => {
       router.replace({ path: '/' })
       // router.redirect({ path: '/' })
     } else {
-      const hasRoles = false // todo roles
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
         access()
       } else {
         try {
-          access()
+          const { roles } = await store.dispatch('user/getInfo')
+          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          // dynamically add accessible routes
+          accessRoutes.forEach(route => router.addRoute(route))
+
+          // access()
+          return to.fullPath // 添加动态路由后，必须加这一句触发重定向，否则会404
         } catch (error) {
           // remove token and go to login page to re-login
           // await store.dispatch('user/resetToken')

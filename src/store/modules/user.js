@@ -2,12 +2,16 @@ import { login } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const state = {
-  token: getToken()
+  token: getToken(),
+  roles: []
 }
 
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
+  },
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -25,6 +29,66 @@ const actions = {
       }).catch(error => {
         reject(error)
       })
+    })
+  },
+
+  // get user info
+  // getInfo({ commit, state }) {
+  //   return new Promise((resolve, reject) => {
+  //     getInfo(state.token).then(response => {
+  //       const { data } = response
+
+  //       if (!data) {
+  //         reject('Verification failed, please Login again.')
+  //       }
+
+  //       const { roles, name, avatar, introduction } = data
+
+  //       // roles must be a non-empty array
+  //       if (!roles || roles.length <= 0) {
+  //         reject('getInfo: roles must be a non-null array!')
+  //       }
+
+  //       commit('SET_ROLES', roles)
+  //       commit('SET_NAME', name)
+  //       commit('SET_AVATAR', avatar)
+  //       commit('SET_INTRODUCTION', introduction)
+  //       resolve(data)
+  //     }).catch(error => {
+  //       reject(error)
+  //     })
+  //   })
+  // },
+  
+  // todo 测试用
+  getInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      // const { data } = response
+      const { data } = {
+        code: 1,
+        data: {
+          roles: ['admin'],
+          introduction: 'I am a super administrator',
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+          name: 'Super Admin'
+        }
+      }
+
+      if (!data) {
+        reject('Verification failed, please Login again.')
+      }
+
+      const { roles, name, avatar, introduction } = data
+
+      // roles must be a non-empty array
+      if (!roles || roles.length <= 0) {
+        reject('getInfo: roles must be a non-null array!')
+      }
+      commit('SET_ROLES', roles)
+      // commit('SET_NAME', name)
+      // commit('SET_AVATAR', avatar)
+      // commit('SET_INTRODUCTION', introduction)
+      resolve(data)
     })
   },
 
