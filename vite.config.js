@@ -1,10 +1,10 @@
-import {defineConfig} from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 // element-ui auto import
 import Components from 'unplugin-vue-components/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // svg插件
 import viteSvgIcons from 'vite-plugin-svg-icons'
@@ -21,7 +21,7 @@ import viteSvgIcons from 'vite-plugin-svg-icons'
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 
 // https://vitejs.dev/config/
-export default ({command, mode}) => {
+export default ({ command, mode }) => {
   return defineConfig({
     // https://vitejs.dev/config/#server-host
     server: {
@@ -50,10 +50,18 @@ export default ({command, mode}) => {
       // svg
       viteSvgIcons({
         // 配置路劲在你的src里的svg存放文件
-        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
+        iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
         symbolId: 'icon-[dir]-[name]',
       })
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 全局变量
+          additionalData: '@import "./src/assets/styles/global-variables.scss";',
+        },
+      },
+    },
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './'),

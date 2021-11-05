@@ -10,6 +10,7 @@
 
 <template>
   <div>dashboard</div>
+  <el-button>11</el-button>
 </template>
 
 <style scoped>

@@ -24,7 +24,16 @@
       :unique-opened="false"
       :active-text-color="variables.menuActiveText"
       :collapse-transition="false" -->
-    <el-menu :default-active="activeMenu" mode="vertical">
+    <el-menu
+      :default-active="activeMenu"
+      :collapse="isCollapse"
+      :background-color="variables.menuBg"
+      :text-color="variables.menuText"
+      :unique-opened="false"
+      :active-text-color="variables.menuActiveText"
+      :collapse-transition="false"
+      mode="vertical"
+    >
       <sidebar-item
         v-for="route in permission_routes"
         :key="route.path"
@@ -45,9 +54,15 @@ import { defineComponent, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
+import SidebarItem from "./SidebarItem.vue";
+
+import config from "./config/menu.module.scss";
+
 export default defineComponent({
   name: "Sidebar",
-
+  components: {
+    SidebarItem,
+  },
   setup() {
     const route = useRoute();
     const store = useStore();
@@ -69,6 +84,7 @@ export default defineComponent({
     return {
       activeMenu,
       permission_routes,
+      variables: computed(() => config),
     };
   },
   //   components: { SidebarItem, Logo },
@@ -98,3 +114,7 @@ export default defineComponent({
   //   }
 });
 </script>
+
+<style lang="scss" scoped>
+@import "./config/siderbar.scss";
+</style>

@@ -8,7 +8,7 @@ export const constantRoutes = [
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    // name: 'Dashboard',
     component: Layout,
     // meta: { title: 'dashboard', icon: 'dashboard', affix: true },
     // component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
@@ -52,7 +52,7 @@ export const asyncRoutes = [
     // name: 'Dashboard',
     children: [
       {
-        path: 'dashboard2',
+        path: '',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard2',
         meta: { title: 'dashboard2', icon: 'dashboard', affix: true }

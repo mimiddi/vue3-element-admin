@@ -22,6 +22,7 @@ router.beforeEach(async (to, from) => {
       // router.redirect({ path: '/' })
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      console.info(hasRoles)
       if (hasRoles) {
         access()
       } else {
