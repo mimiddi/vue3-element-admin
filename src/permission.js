@@ -7,7 +7,7 @@ import getPageTitle from '@/utils/get-page-title'
 // import { getToken } from '@/utils/auth' // get token from cookie
 
 const whiteList = ['/login', '/404']
-const hasToken = true
+const hasToken = false
 
 router.beforeEach(async (to, from) => {
   document.title = getPageTitle(!!to.meta && to.meta.title)

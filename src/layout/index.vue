@@ -42,7 +42,7 @@ export default defineComponent({
 
     const siderbar = store.getters.siderbar
     const siderbar2 = store.state.app.device
-    console.info(store.getters.device, siderbar, siderbar2, 1111111111, ...mapGetters['device'])
+    // console.info(store.getters.device, siderbar, siderbar2, 1111111111, ...mapGetters['device'])
     
     // const collapse = computed(() => !!store.state.app.sidebar.collapse)
     // const device = computed(() => store.state.app.device)

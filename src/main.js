@@ -8,9 +8,14 @@ import store from './store'
 import '@/assets/styles/index.scss' // global css
 
 // element-ui
-// import ElementPlus from 'element-plus' // 全局引入
-// import { ElButton, ElContainer } from 'element-plus' // 按需引入
+import ElementPlus from 'element-plus' // 全局引入
+import './assets/styles/element-variables.scss'
 
+// 引入中文模块
+import 'dayjs/locale/zh-cn'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
+
+// import { ElButton, ElContainer } from 'element-plus' // 按需引入
 /**
  * 第三种方案，自动按需引入，需在 vite.config.js 中的 plugins 配置 Components
  * import Components from 'unplugin-vue-components/vite'
@@ -20,8 +25,7 @@ import '@/assets/styles/index.scss' // global css
       resolvers: [ElementPlusResolver()],
    })
  */
-import './assets/styles/element-variables.scss'
-import 'element-plus/dist/index.css'
+// import 'element-plus/dist/index.css'
 
 // import './icons' // icon
 // 引入svg图标注册脚本
@@ -35,9 +39,6 @@ Object.entries(Components).forEach(([key, component]) => {
 
 import './permission' // permission control
 
-app.use(router)
-app.use(store)
-
 // 全局引入
 // app.use(ElementPlus)
 
@@ -45,4 +46,8 @@ app.use(store)
 // app.use(ElButton)
 //   .use(ElContainer)
 
-app.mount('#app')
+app
+  .use(ElementPlus, { locale })
+  .use(store)
+  .use(router)
+  .mount('#app')

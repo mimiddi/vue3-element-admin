@@ -3,8 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 // element-ui auto import
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // svg插件
 import viteSvgIcons from 'vite-plugin-svg-icons'
@@ -43,9 +43,9 @@ export default ({ command, mode }) => {
       vue(),
 
       // element-ui auto import
-      Components({
-        resolvers: [ElementPlusResolver()],
-      }),
+      // Components({
+      //   resolvers: [ElementPlusResolver()],
+      // }),
 
       // svg
       viteSvgIcons({
