@@ -2,15 +2,31 @@
 /* 改变主题色变量 */
 $--colors: (
   "primary": (
-    // 'base': $mainColor,
-    "base": rgb(255, 115, 0),
+    "base": $mainColor,
   ),
+);
+
+/* 改变输入框变量 */
+$--border-radius: (
+  "base": 4px,
+);
+$--border-color: (
+  (
+    "base": #c1c2cd,
+  )
+);
+$--text-color: (
+  (
+    "placeholder": #C1C2CD,
+  )
 );
 
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: "element-plus/lib/theme-chalk/fonts";
 @import "element-plus/packages/theme-chalk/src/reset";
 @import "element-plus/packages/theme-chalk/src/index";
+
+@import "element-plus/packages/theme-chalk/src/common/var";
 
 // 1.1.0-beta.1 新增
 /* 只需要重写你需要的即可 */

@@ -54,7 +54,8 @@ import './permission' // permission control
 app
   // ElementPlus 全局引入
   // .use(ElementPlus, { locale })
-  .use(ElementPlus, { size: 'small', zIndex: 3000 })
+  // .use(ElementPlus, { size: 'small', zIndex: 3000 })
+  .use(ElementPlus)
   .use(store)
   .use(router)
   .mount('#app')

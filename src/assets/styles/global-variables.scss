@@ -1,7 +1,8 @@
 // 该文件中的变量是全局变量，在css文件和vue组件中可以直接使用
 
-$mainColor: #409eff; // 网站主题色
+$mainColor: #545dff; // 网站主题色
 
+// todo 待修改
 // 侧边栏
 $menuBg: #304156; // 菜单背景颜色
 $menuTextColor: #fff; // 菜单文字颜色
@@ -18,25 +19,25 @@ $arrowColor: #909399; // 展开/收起箭头颜色
 $horizontalMenuHeight: 40px; // 菜单栏水平排列时候的高度
 
 // base color
-$blue:#324157;
-$light-blue:#3A71A8;
-$red:#C03639;
-$pink: #E65D6E;
-$green: #30B08F;
-$tiffany: #4AB7BD;
-$yellow:#FEC171;
-$panGreen: #30B08F;
+$blue: #324157;
+$light-blue: #3a71a8;
+$red: #c03639;
+$pink: #e65d6e;
+$green: #30b08f;
+$tiffany: #4ab7bd;
+$yellow: #fec171;
+$panGreen: #30b08f;
 
 // sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
-$subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+$menuText: #bfcbd9;
+$menuActiveText: #409eff;
+$subMenuActiveText: #f4f4f5; // https://github.com/ElemeFE/element/issues/12951
 
-$menuBg:#304156;
-$menuHover:#263445;
+$menuBg: #304156;
+$menuHover: #263445;
 
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
 
 $sideBarWidth: 210px;
 // :export {
@@ -49,3 +50,14 @@ $sideBarWidth: 210px;
 //     subMenuHover: $subMenuHover;
 //     sideBarWidth: $sideBarWidth;
 //   }
+
+// element ui
+.el-input__inner {
+    padding: 0 12px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+}
+.el-button {
+    padding-top: 10 !important;
+    padding-bottom: 10 !important;
+}
