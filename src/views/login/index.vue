@@ -1,87 +1,111 @@
-<script setup>
-import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
-import { useStore, mapGetters } from "vuex";
-
-// import { login } from '@/api/user'
-// console.info(login)
-// login({ username: '13055257913', password: '123456' })
-
-const route = useRoute();
-const store = useStore();
-
-const username = ref("");
-const password = ref("");
-
-/**
- * src/permission.js
- * 保存token失效返回login之前的path
- * 登录成功则跳转指定页面redirect
- */
-const { query } = route;
-let redirect = undefined; // 要跳转的页面
-let otherQuery = {}; // 要跳转的页面参数
-if (query) {
-  redirect = query.redirect;
-  otherQuery = getOtherQuery(query);
-
-  // 提取其他参数
-  function getOtherQuery(query) {
-    return Object.keys(query).reduce((acc, cur) => {
-      if (cur !== "redirect") {
-        acc[cur] = query[cur];
-      }
-      return acc;
-    }, {});
-  }
-}
-
-const allState = store.state;
-console.info(allState.test.testState);
-computed({ ...mapGetters(["testState"]) });
-
-store.dispatch("test/setTestState", true);
-// const count = ref(0)
-// const computedState = computed({
-//   get: () => count.value + 1,
-//   set: val => {
-//     count.value = val - 1
-//   }
-// })
-
-const computedState = computed({
-  get: () => allState.test.testState + 1,
-  set: (val) => {
-    // allState.test.value = val - 1
-  },
-});
-
-// console.info(res)
-
-console.info(store.state.test.testState);
-
-// login
-function login() {
-  console.info(111);
-}
-</script>
-
 <template>
-  <div>login</div>
-  <!--<div @click="count++">{{ count }}</div>-->
-  <el-button type="primary">1112 {{ testState }}</el-button>
-  <div>{{ computedState }}</div>
+  <div class="login-container">
+    <div>1</div>
 
-  <el-button @click="login">login</el-button>
-  <div class="a">
-    <div class="a2">a2</div>
-    <div class="b">1</div>
+    <!-- <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      autocomplete="on"
+      label-position="left"
+    >
+      <div class="title-container">
+        <h3 class="title">
+          {{ $t("login.title") }}
+        </h3>
+        <lang-select class="set-language" />
+      </div>
+
+      <el-form-item prop="username">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          :placeholder="$t('login.username')"
+          name="username"
+          type="text"
+          tabindex="1"
+          autocomplete="on"
+        />
+      </el-form-item>
+
+      <el-tooltip
+        v-model="capsTooltip"
+        content="Caps lock is On"
+        placement="right"
+        manual
+      >
+        <el-form-item prop="password">
+          <span class="svg-container">
+            <svg-icon icon-class="password" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="password"
+            v-model="loginForm.password"
+            :type="passwordType"
+            :placeholder="$t('login.password')"
+            name="password"
+            tabindex="2"
+            autocomplete="on"
+            @keyup.native="checkCapslock"
+            @blur="capsTooltip = false"
+            @keyup.enter.native="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon
+              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+            />
+          </span>
+        </el-form-item>
+      </el-tooltip>
+
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        @click.native.prevent="handleLogin"
+      >
+        {{ $t("login.logIn") }}
+      </el-button>
+
+      <div style="position: relative">
+        <div class="tips">
+          <span>{{ $t("login.username") }} : admin</span>
+          <span>{{ $t("login.password") }} : {{ $t("login.any") }}</span>
+        </div>
+        <div class="tips">
+          <span style="margin-right: 18px">
+            {{ $t("login.username") }} : editor
+          </span>
+          <span>{{ $t("login.password") }} : {{ $t("login.any") }}</span>
+        </div>
+
+        <el-button
+          class="thirdparty-button"
+          type="primary"
+          @click="showDialog = true"
+        >
+          {{ $t("login.thirdparty") }}
+        </el-button>
+      </div> -->
+    <!-- </el-form> -->
   </div>
-  <svg-icon :icon-class="'404'" :color="'orange'" />
 </template>
 
-<style scoped>
-a {
-  color:#42b983;
+<script>
+export default {};
+</script>
+
+<style lang="scss" scoped>
+.login-container {
+  width: 100%;
+  height: 100%;
+  background: url(../../assets/images/login/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 </style>

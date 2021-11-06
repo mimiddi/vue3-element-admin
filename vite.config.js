@@ -2,9 +2,14 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-// element-ui auto import
+/**
+ * element-ui auto import
+ * 但自定义主题不好使
+ */
 // import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// 或者使用 unplugin-element-plus
+// import ElementPlus from 'unplugin-element-plus/vite'
 
 // svg插件
 import viteSvgIcons from 'vite-plugin-svg-icons'
@@ -46,6 +51,19 @@ export default ({ command, mode }) => {
       // Components({
       //   resolvers: [ElementPlusResolver()],
       // }),
+      // Components({
+      //   resolvers: [
+      //     ElementPlusResolver({
+      //       importStyle: "sass",
+      //       // directives: true,
+      //       // version: "1.2.0-beta.1",
+      //     }),
+      //   ],
+      // }),
+      // or use unplugin-element-plus
+      // ElementPlus({
+      //   useSource: true,
+      // }),
 
       // svg
       viteSvgIcons({
@@ -59,6 +77,7 @@ export default ({ command, mode }) => {
         scss: {
           // 全局变量
           additionalData: '@import "./src/assets/styles/global-variables.scss";',
+          // additionalData: `@use "./src/assets/styles/element-variables.scss" as *;`,
         },
       },
     },

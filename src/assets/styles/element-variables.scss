@@ -1,8 +1,9 @@
+//  "element-plus": "^1.0.2-beta.71",
 /* 改变主题色变量 */
 $--colors: (
   "primary": (
     // 'base': $mainColor,
-    "base": rgb(243, 0, 61),
+    "base": rgb(255, 115, 0),
   ),
 );
 
@@ -10,3 +11,13 @@ $--colors: (
 $--font-path: "element-plus/lib/theme-chalk/fonts";
 @import "element-plus/packages/theme-chalk/src/reset";
 @import "element-plus/packages/theme-chalk/src/index";
+
+// 1.1.0-beta.1 新增
+/* 只需要重写你需要的即可 */
+// @forward "element-plus/theme-chalk/src/common/var.scss" with (
+//   $colors: (
+//     "primary": (
+//       "base": green,
+//     ),
+//   ),
+// );
