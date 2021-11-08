@@ -20,16 +20,15 @@ router.beforeEach(async (to, from) => {
       router.replace({ path: '/' })
       // router.redirect({ path: '/' })
     } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      console.info(hasRoles)
-      if (hasRoles) {
+      const hasRole = store.getters.role && store.getters.role.length
+      if (hasRole) {
         access()
       } else {
         try {
-          const { roles } = await store.dispatch('user/getInfo')
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          const { role } = await store.dispatch('user/getUserInfo') // 获取用户信息和权限，根据权限生成对应菜单
+          const accessRoutes = await store.dispatch('permission/generateRoutes', role)
           // dynamically add accessible routes
-          accessRoutes.forEach(route => router.addRoute(route))
+          // accessRoutes.forEach(route => router.addRoute(route))
 
           // access()
           return to.fullPath // 添加动态路由后，必须加这一句触发重定向，否则会404

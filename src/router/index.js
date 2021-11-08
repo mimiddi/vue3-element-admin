@@ -39,29 +39,25 @@ export const constantRoutes = [
   },
 
   // 匹配所有路径 /:pathMatch(.*)* 或 /:pathMatch(.*) 或 /:catchAll(.*)
-  { path: '/:pathMatch(.*)*', redirect: '/404', name: 'NotFound', hidden: true }
+  // { path: '/:pathMatch(.*)*', redirect: '/404', name: 'NotFound', hidden: true }
 ]
 
 export const asyncRoutes = [
   {
-    path: '/dashboard2',
-    // name: 'Dashboard2',
+    path: '/table',
     component: Layout,
-    // meta: { title: 'dashboard', icon: 'dashboard', affix: true },
-    // component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-    // name: 'Dashboard',
     children: [
       {
         path: '',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-        name: 'Dashboard2',
-        meta: { title: 'dashboard2', icon: 'dashboard', affix: true }
+        name: 'Table',
+        meta: { title: 'table', icon: 'dashboard', affix: true }
       }
     ]
   },
 
   // 匹配所有路径 /:pathMatch(.*)* 或 /:pathMatch(.*) 或 /:catchAll(.*)
-  // { path: '/:pathMatch(.*)*', redirect: '/404', name: 'Page404', hidden: true }
+  { path: '/:pathMatch(.*)*', redirect: '/404', name: 'Page404', hidden: true }
 ]
 
 const router = createRouter({
