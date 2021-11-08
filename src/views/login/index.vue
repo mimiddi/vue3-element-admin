@@ -10,135 +10,116 @@
         </div>
       </div>
       <div class="login-container__right">
+        <!-- ref 与 model 同名会导致值显示不出来 -->
         <el-form
-          ref="loginForm"
+          ref="loginFormRef"
           :model="loginForm"
           :rules="loginRules"
+          autocomplete="on"
           label-width="0"
         >
           <div class="login-container__right-title">欢迎登录</div>
-          <el-form-item label="">
-            <el-input v-model="loginForm.username" placeholder="用户名" />
+          <el-form-item label="" prop="username">
+            <el-input
+              v-model="loginForm.username"
+              clearable
+              name="username"
+              type="text"
+              tabindex="1"
+              autocomplete="on"
+              placeholder="用户名"
+            />
+          </el-form-item>
+
+          <el-form-item label="" prop="password">
+            <el-input
+              v-model="loginForm.password"
+              show-password
+              name="password"
+              tabindex="2"
+              autocomplete="on"
+              placeholder="密码"
+              @keyup="checkCapslock"
+              @blur="capsTooltip = false"
+              @keyup.enter="handleLogin"
+            />
           </el-form-item>
 
           <el-form-item label="">
-            <el-input v-model="loginForm.password" placeholder="密码" />
-          </el-form-item>
-
-          <el-form-item label="">
-            <el-button class="login-container__login-button" type="primary">登录</el-button>
+            <el-button
+              class="login-container__login-button"
+              type="primary"
+              :loading="loading"
+              @click.prevent="handleLogin"
+              >登录
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
     </div>
-
-    <!-- <el-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      autocomplete="on"
-      label-position="left"
-    >
-      <div class="title-container">
-        <h3 class="title">
-          {{ $t("login.title") }}
-        </h3>
-        <lang-select class="set-language" />
-      </div>
-
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          :placeholder="$t('login.username')"
-          name="username"
-          type="text"
-          tabindex="1"
-          autocomplete="on"
-        />
-      </el-form-item>
-
-      <el-tooltip
-        v-model="capsTooltip"
-        content="Caps lock is On"
-        placement="right"
-        manual
-      >
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password" />
-          </span>
-          <el-input
-            :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
-            :type="passwordType"
-            :placeholder="$t('login.password')"
-            name="password"
-            tabindex="2"
-            autocomplete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
-          />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon
-              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-            />
-          </span>
-        </el-form-item>
-      </el-tooltip>
-
-      <el-button
-        :loading="loading"
-        type="primary"
-        style="width: 100%; margin-bottom: 30px"
-        @click.native.prevent="handleLogin"
-      >
-        {{ $t("login.logIn") }}
-      </el-button>
-
-      <div style="position: relative">
-        <div class="tips">
-          <span>{{ $t("login.username") }} : admin</span>
-          <span>{{ $t("login.password") }} : {{ $t("login.any") }}</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right: 18px">
-            {{ $t("login.username") }} : editor
-          </span>
-          <span>{{ $t("login.password") }} : {{ $t("login.any") }}</span>
-        </div>
-
-        <el-button
-          class="thirdparty-button"
-          type="primary"
-          @click="showDialog = true"
-        >
-          {{ $t("login.thirdparty") }}
-        </el-button>
-      </div> -->
-    <!-- </el-form> -->
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, ref, reactive, toRefs } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
+import { ElMessage } from "element-plus";
+
 export default defineComponent({
+  name: "Login",
   setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const store = useStore();
     const state = reactive({
       loginForm: {
-        username: "1",
+        username: "",
         password: "",
       },
+      loginRules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 12,
+            message: "长度在 6 到 12 个字符",
+            trigger: "blur",
+          },
+        ],
+      },
+      loading: false, // 提交状态
+      loginFormRef: ref(),
+      handleLogin: () => {
+        state.loginFormRef.validate(async (valid) => {
+          if (valid) {
+            state.loading = true;
+            store
+              .dispatch("user/login", state.loginForm)
+              .then(({ message }) => {
+                ElMessage.success({ message });
+                const targetPath = decodeURIComponent(route.query.redirect);
+                if (targetPath.startsWith("http")) {
+                  // 如果是一个url地址
+                  window.location.href = targetPath;
+                } else if (targetPath.startsWith("/")) {
+                  // 如果是内部路由地址
+                  router.push(targetPath);
+                } else {
+                  router.push("/");
+                }
+                state.loading = false;
+              });
+          }
+        });
+      },
     });
+
     return {
       ...toRefs(state),
-      loginRules: [],
     };
   },
 });
@@ -268,6 +249,7 @@ export default defineComponent({
     }
     &__right {
       border-radius: 4px;
+      padding: 10% 54px 0 54px;
     }
   }
 }

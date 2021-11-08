@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function login(data) {
+export const login = (data) => {
   return request({
-    url: '/adminapi/index/login',
+    url: '/vue3-element-admin/login',
     method: 'post',
     data
   })

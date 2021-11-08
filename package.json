@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "dev:mock": "vite --mode mock",
     "build": "vite build",
+    "build:mock": "vite build --mode mock",
     "serve": "vite preview",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.js",
     "lint": "eslint --ext .js,.vue src"
@@ -23,11 +25,13 @@
     "@vitejs/plugin-vue": "^1.9.3",
     "eslint": "^8.1.0",
     "eslint-plugin-vue": "^7.20.0",
+    "mockjs": "^1.1.0",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "svgo": "^2.7.0",
     "unplugin-element-plus": "^0.1.3",
     "vite": "^2.6.4",
+    "vite-plugin-mock": "^2.3.0",
     "vite-plugin-svg-icons": "^1.0.5"
   },
   "main": "index.js",

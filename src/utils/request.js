@@ -49,8 +49,8 @@ service.interceptors.response.use(
     }
 
     const res = response.data
-    // if the custom code is not 10000, it is judged as an error.
-    if (res.code !== 10000) {
+    // if the custom code is not 20000, it is judged as an error.
+    if (res.code !== 20000) {
       ElMessage({
         message: res.message || 'Error',
         type: 'error',

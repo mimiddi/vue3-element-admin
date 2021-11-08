@@ -17,14 +17,15 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
+  login({ commit }, loginForm) {
+    const { username, password } = loginForm
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { token, user } = response.data
+        const { data, message } = response
+        const { token } = data
         commit('SET_TOKEN', token)
-        commit('SET_ROLES', user.role)
         setToken(token)
+        resolve({ message })
         resolve()
       }).catch(error => {
         reject(error)
@@ -59,7 +60,7 @@ const actions = {
   //     })
   //   })
   // },
-  
+
   // todo 测试用
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {

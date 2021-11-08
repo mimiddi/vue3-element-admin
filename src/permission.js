@@ -4,18 +4,17 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { ElMessage } from 'element-plus'
 import getPageTitle from '@/utils/get-page-title'
-// import { getToken } from '@/utils/auth' // get token from cookie
+import { getToken } from '@/utils/auth' // get token from cookie
 
 const whiteList = ['/login', '/404']
-const hasToken = false
 
 router.beforeEach(async (to, from) => {
   document.title = getPageTitle(!!to.meta && to.meta.title)
 
   // start progress bar
   NProgress.start()
-  // console.info(to, from)
 
+  const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
       router.replace({ path: '/' })

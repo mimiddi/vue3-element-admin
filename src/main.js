@@ -51,6 +51,13 @@ import './permission' // permission control
 // app.use(ElButton)
 //   .use(ElContainer)
 
+// 定义全局方法
+// import { ElMessage } from 'element-plus'
+// app.config.globalProperties.$message = ElMessage
+// home.vue 不推荐使用
+// const { proxy: ctx } = getCurrentInstance();
+// ctx.$message
+
 app
   // ElementPlus 全局引入
   // .use(ElementPlus, { locale })
