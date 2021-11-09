@@ -9,7 +9,7 @@
     .sidebar-container {
         transition: width 0.28s;
         width: $sideBarWidth !important;
-        background-color: $menuBg;
+        background: $menuBg;
         height: 100%;
         position: fixed;
         font-size: 0px;
@@ -87,6 +87,15 @@
             &:hover {
                 background-color: $subMenuHover !important;
             }
+        }
+
+        .el-menu-item.is-active {
+            background-color: $menuActiveBg !important;
+        }
+
+        // 箭头颜色
+        .el-submenu__title i {
+            color: currentColor !important;
         }
     }
 

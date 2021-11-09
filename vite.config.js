@@ -103,6 +103,9 @@ export default ({ command, mode }) => {
         '~': path.resolve(__dirname, './'),
         '@': path.resolve(__dirname, 'src')
       }
+    },
+    define: {
+      'process.env': {} // 解决vue3被移除
     }
   })
 }

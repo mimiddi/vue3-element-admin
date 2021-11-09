@@ -1,7 +1,7 @@
 <template>
   <template v-if="icon">
     <i v-if="isElIcon" class="sub-el-icon" :class="{ icon }" />
-    <svg-icon v-else :icon-class="icon" />
+    <svg-icon v-else :icon-class="icon" :color="'currentColor'" />
   </template>
   <slot name="title">
     <span>{{ title }}</span>

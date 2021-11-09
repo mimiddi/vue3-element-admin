@@ -1,3 +1,6 @@
+/**
+ * 当前废弃
+ */
 import Layout from '@/layout/index.vue'
 
 // 匹配所有路径 /:pathMatch(.*)* 或 /:pathMatch(.*) 或 /:catchAll(.*)

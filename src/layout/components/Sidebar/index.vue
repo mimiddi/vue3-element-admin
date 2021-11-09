@@ -27,10 +27,10 @@
     <el-menu
       :default-active="activeMenu"
       :collapse="isCollapse"
-      :background-color="variables.menuBg"
-      :text-color="variables.menuText"
+      :background-color="variables.menuItemBg"
+      :text-color="variables.menuTextColor"
       :unique-opened="false"
-      :active-text-color="variables.menuActiveText"
+      :active-text-color="variables.menuActiveTextColor"
       :collapse-transition="false"
       mode="vertical"
     >
@@ -114,7 +114,3 @@ export default defineComponent({
   //   }
 });
 </script>
-
-<style lang="scss" scoped>
-@import "./config/siderbar.scss";
-</style>

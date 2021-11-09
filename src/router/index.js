@@ -36,22 +36,29 @@ export const constantRoutes = [
     path: '/404',
     name: 'Page404',
     component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue')
-  },
-
-  // 匹配所有路径 /:pathMatch(.*)* 或 /:pathMatch(.*) 或 /:catchAll(.*)
-  // { path: '/:pathMatch(.*)*', redirect: '/404', name: 'NotFound', hidden: true }
+  }
 ]
 
 export const asyncRoutes = [
   {
     path: '/table',
     component: Layout,
+    name: 'Table',
+    meta: { title: 'table', icon: 'dashboard', access: ['table/index', 'table/detail'] },
     children: [
       {
-        path: '',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-        name: 'Table',
-        meta: { title: 'table', icon: 'dashboard', affix: true }
+        path: 'index',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
+        name: 'TableIndex',
+        // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
+        meta: { title: 'tableList', icon: 'dashboard', access: ['table/index'] }
+      },
+      {
+        path: 'detail',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
+        name: 'TableDetail',
+        // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
+        meta: { title: 'tableDetail', icon: 'dashboard', access: ['table/detail'] }
       }
     ]
   },
