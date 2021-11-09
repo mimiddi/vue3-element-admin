@@ -17,10 +17,6 @@
       </right-panel> -->
     </div>
   </div>
-  <!-- <div :class="classObj" class="app-wrapper">
-    <sidebar class="sidebar-container" />
-    <app-main />
-  </div> -->
 </template>
 
 <script>
@@ -89,6 +85,7 @@ export default defineComponent({
 
     return {
       classObj,
+      handleClickOutside
     };
   },
 });
