@@ -91,6 +91,8 @@
 
         .el-menu-item.is-active {
             background-color: $menuActiveBg !important;
+            // border-radius: $menuActiveBorderRadius;
+            // margin: $menuActiveMargin;
         }
 
         // 箭头颜色

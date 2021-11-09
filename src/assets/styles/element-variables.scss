@@ -17,7 +17,7 @@ $--border-color: (
 );
 $--text-color: (
   (
-    "placeholder": #C1C2CD,
+    "placeholder": #c1c2cd,
   )
 );
 
@@ -27,6 +27,10 @@ $--font-path: "element-plus/lib/theme-chalk/fonts";
 @import "element-plus/packages/theme-chalk/src/index";
 
 @import "element-plus/packages/theme-chalk/src/common/var";
+
+:export {
+  theme: $mainColor;
+}
 
 // 1.1.0-beta.1 新增
 /* 只需要重写你需要的即可 */

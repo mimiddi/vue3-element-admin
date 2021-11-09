@@ -68,6 +68,7 @@ export default defineComponent({
     const store = useStore();
 
     const { meta, path } = route;
+    const { sidebar } = store.getters;
 
     const activeMenu = computed(() => {
       // if set path, the sidebar will highlight the path you set
@@ -81,9 +82,14 @@ export default defineComponent({
       return store.getters.permission_routes;
     });
 
+    const isCollapse = computed(() => {
+      return !sidebar.opened;
+    });
+
     return {
       activeMenu,
       permission_routes,
+      isCollapse,
       variables: computed(() => config),
     };
   },

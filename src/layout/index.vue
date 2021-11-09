@@ -1,16 +1,20 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <div
+      v-if="device === 'mobile' && sidebar.opened"
+      class="drawer-bg"
+      @click="handleClickOutside"
+    />
     <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
+    <div :class="{ hasTagsView: needTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
         <navbar />
-        <tags-view v-if="needTagsView" />
+        <!-- <tags-view v-if="needTagsView" /> -->
       </div>
       <app-main />
-      <right-panel v-if="showSettings">
+      <!-- <right-panel v-if="showSettings">
         <settings />
-      </right-panel>
+      </right-panel> -->
     </div>
   </div>
   <!-- <div :class="classObj" class="app-wrapper">
@@ -20,68 +24,78 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
-import { useStore, mapGetters } from "vuex";
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from "./components";
+import { defineComponent, computed } from "vue";
+import { useStore, mapState } from "vuex";
+// import { AppMain, Navbar, Settings, Sidebar, TagsView } from "./components";
+import { AppMain, Navbar, Sidebar } from "./components";
 // import AppMain from "./components/AppMain.vue";
 import { useResizeHandler } from "./hooks/ResizeHandler";
 
 export default defineComponent({
-  name: "layout",
+  name: "Layout",
   components: {
     Sidebar,
+    Navbar,
     // Topbar,
     // Menus,
     // Tagsbar,
     // Breadcrumbs,
     AppMain,
   },
+   computed: {
+    ...mapState({
+      sidebar: state => state.app.sidebar,
+      device: state => state.app.device,
+      showSettings: state => state.settings.showSettings,
+      needTagsView: state => state.settings.tagsView,
+      fixedHeader: state => state.settings.fixedHeader
+    }),
+    // classObj() {
+    //   return {
+    //     hideSidebar: !this.sidebar.opened,
+    //     openSidebar: this.sidebar.opened,
+    //     withoutAnimation: this.sidebar.withoutAnimation,
+    //     mobile: this.device === 'mobile'
+    //   }
+    // }
+  },
   setup() {
     useResizeHandler();
     const store = useStore();
 
-    const siderbar = store.getters.siderbar
-    const siderbar2 = store.state.app.device
-    // console.info(store.getters.device, siderbar, siderbar2, 1111111111, ...mapGetters['device'])
-    
-    // const collapse = computed(() => !!store.state.app.sidebar.collapse)
-    // const device = computed(() => store.state.app.device)
+    // computed({
+    //   ...mapState({
+    //     sidebar: (state) => state.app.sidebar,
+    //     device: (state) => state.app.device,
+    //     showSettings: (state) => state.settings.showSettings,
+    //     needTagsView: (state) => state.settings.tagsView,
+    //     fixedHeader: (state) => state.settings.fixedHeader,
+    //   }),
+    // });
 
-    // sidebar: state => state.app.sidebar,
-    //   device: state => state.app.device,
-    //   showSettings: state => state.settings.showSettings,
-    //   needTagsView: state => state.settings.tagsView,
-    //   fixedHeader: state => state.settings.fixedHeader
+    const classObj = computed(() => {
+      const { sidebar, device } = store.getters;
+      return {
+        hideSidebar: !sidebar.opened,
+        openSidebar: sidebar.opened,
+        withoutAnimation: sidebar.withoutAnimation,
+        mobile: device === "mobile",
+      };
+    });
 
-    // const defaultSettings = computed(() => store.state.layoutSettings);
-    // const isFluid = computed(() => defaultSettings.value.layout.isFluid);
-    // const isTopbarFixed = computed(() => defaultSettings.value.topbar.isFixed);
-    // const isMenusShow = computed(() => defaultSettings.value.menus.isShow);
-    // const isHorizontalMenu = computed(
-    //   () => defaultSettings.value.menus.mode === "horizontal"
-    // );
-    // const isBreadcrumbsShow = computed(
-    //   () => isHorizontalMenu.value && defaultSettings.value.breadcrumbs.isShow
-    // );
-    // const paddingFlag = ref(true);
-    // const handleBreadcrumbsChange = (boo) => {
-    //   paddingFlag.value = boo;
-    // };
+    const handleClickOutside = () => {
+      store.dispatch("app/closeSideBar", { withoutAnimation: false });
+    };
 
     return {
-      //   isFluid,
-      //   isTopbarFixed,
-      //   isMenusShow,
-      //   isHorizontalMenu,
-      //   isBreadcrumbsShow,
-      //   paddingFlag,
-      //   handleBreadcrumbsChange,
+      classObj,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/mixin.scss";
 .app-wrapper {
   // @include clearfix;
   position: relative;

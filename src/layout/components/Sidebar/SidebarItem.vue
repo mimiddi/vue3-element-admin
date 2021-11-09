@@ -110,7 +110,6 @@ export default defineComponent({
     };
 
     const resolvePath = (routePath) => {
-      console.info(props.basePath, routePath);
       if (isExternal(routePath)) {
         return routePath;
       }

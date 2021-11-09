@@ -8,11 +8,7 @@ export const constantRoutes = [
   },
   {
     path: '/dashboard',
-    // name: 'Dashboard',
     component: Layout,
-    // meta: { title: 'dashboard', icon: 'dashboard', affix: true },
-    // component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-    // name: 'Dashboard',
     children: [
       {
         path: '',
@@ -47,7 +43,7 @@ export const asyncRoutes = [
     meta: { title: 'table', icon: 'dashboard', access: ['table/index', 'table/detail'] },
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
         name: 'TableIndex',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
