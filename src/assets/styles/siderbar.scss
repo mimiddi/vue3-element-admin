@@ -160,6 +160,10 @@
                 }
             }
         }
+
+        .submenu-title-noDropdown > div > span {
+            opacity: 0 !important;
+        }
     }
 
     .el-menu--collapse .el-menu .el-submenu {
@@ -208,6 +212,8 @@
 
     .nest-menu .el-submenu > .el-submenu__title,
     .el-menu-item {
+        // 折叠子菜单文字颜色
+        color: $mainColor !important;
         &:hover {
             // you can use $subMenuHover
             background-color: $menuHover !important;

@@ -17,6 +17,9 @@
             :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
             :title="onlyOneChild.meta.title"
           />
+          <template #title>
+            <span>{{ onlyOneChild.meta.title }}</span>
+          </template>
         </el-menu-item>
       </app-link>
     </template>
@@ -49,7 +52,7 @@
 
 <script>
 import { defineComponent, reactive, toRefs } from "vue";
-import path from 'path'
+import path from "path";
 // import { generateTitle } from '@/utils/i18n'
 
 import Item from "./Item.vue";
