@@ -48,7 +48,7 @@ export const asyncRoutes = [
         name: 'TableIndex',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
         meta: {
-          title: 'tableList', icon: 'dashboard', access: ['table/index'], noCache: true, // 不缓存页面
+          title: 'tableList', access: ['table/index'], noCache: true, // 不缓存页面
         }
       },
       {
@@ -56,7 +56,7 @@ export const asyncRoutes = [
         component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
         name: 'TableDetail',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
-        meta: { title: 'tableDetail', icon: 'dashboard', access: ['table/detail'] }
+        meta: { title: 'tableDetail', access: ['table/detail'] }
       }
     ]
   },
