@@ -1,3 +1,8 @@
+/**
+ * affix：固钉，tags固定不可关闭的选项
+ * noCache：不缓存（注意需要页面缓存请保证页面的name与路由的name相同），
+ *  添加缓存页面的方式 useStore().dispatch("tagsView/addCachedView", useRoute());
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
@@ -14,7 +19,7 @@ export const constantRoutes = [
         path: '',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', affix: true, keepAlive: true }
+        meta: { title: 'dashboard', icon: 'dashboard', affix: true, noCache: true }
       }
     ]
   },

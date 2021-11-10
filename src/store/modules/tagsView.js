@@ -1,3 +1,4 @@
+// https://juejin.cn/post/6978772143748153381 第二种缓存方式
 const state = {
   visitedViews: [],
   cachedViews: [] // 要缓存的页面
@@ -68,7 +69,6 @@ const mutations = {
 
 const actions = {
   addView({ dispatch }, view) {
-    console.info(view)
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },
