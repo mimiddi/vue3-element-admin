@@ -69,4 +69,11 @@ const router = createRouter({
   routes: constantRoutes
 })
 
+export const resetRouter = () => {
+  asyncRoutes.forEach(route => {
+    router.removeRoute(route)
+  })
+  return router
+}
+
 export default router

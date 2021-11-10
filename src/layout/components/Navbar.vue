@@ -9,23 +9,23 @@
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
-    <!-- <div class="right-menu">
+    <div class="right-menu">
       <template v-if="device !== 'mobile'">
-        <search id="header-search" class="right-menu-item" />
+        <!-- <search id="header-search" class="right-menu-item" /> -->
 
-        <error-log class="errLog-container right-menu-item hover-effect" />
+        <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
-        <el-tooltip
+        <!-- <el-tooltip
           :content="$t('navbar.size')"
           effect="dark"
           placement="bottom"
         >
           <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
+        </el-tooltip> -->
 
-        <lang-select class="right-menu-item hover-effect" />
+        <!-- <lang-select class="right-menu-item hover-effect" /> -->
       </template>
 
       <el-dropdown
@@ -33,42 +33,32 @@
         trigger="click"
       >
         <div class="avatar-wrapper">
-          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
+          <img :src="user_info.avatar" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/profile/index">
-              <el-dropdown-item>
-                {{ $t("navbar.profile") }}
-              </el-dropdown-item>
+            <router-link to="/">
+              <el-dropdown-item> 个人中心 </el-dropdown-item>
             </router-link>
             <router-link to="/">
-              <el-dropdown-item>
-                {{ $t("navbar.dashboard") }}
-              </el-dropdown-item>
+              <el-dropdown-item> 首页 </el-dropdown-item>
             </router-link>
-            <a
+            <!-- <a
               target="_blank"
-              href="https://github.com/PanJiaChen/vue-element-admin/"
+              href="https://github.com/"
             >
               <el-dropdown-item>
                 {{ $t("navbar.github") }}
               </el-dropdown-item>
-            </a>
-            <a
-              target="_blank"
-              href="https://panjiachen.github.io/vue-element-admin-site/#/"
-            >
-              <el-dropdown-item>Docs</el-dropdown-item>
-            </a>
+            </a> -->
             <el-dropdown-item divided @click="logout">
-              <span style="display: block">{{ $t("navbar.logOut") }}</span>
+              <span style="display: block">退出登录</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -80,7 +70,7 @@ import { useRouter, useRoute } from "vue-router";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Hamburger from "@/components/Hamburger/index.vue";
 // import ErrorLog from "@/components/ErrorLog/index.vue";
-// import Screenfull from "@/components/Screenfull/index.vue";
+import Screenfull from "@/components/Screenfull/index.vue";
 // import SizeSelect from "@/components/SizeSelect/index.vue";
 // import LangSelect from "@/components/LangSelect/index.vue";
 // import Search from "@/components/HeaderSearch/index.vue";
@@ -90,13 +80,13 @@ export default defineComponent({
     Breadcrumb,
     Hamburger,
     // ErrorLog,
-    // Screenfull,
+    Screenfull,
     // SizeSelect,
     // LangSelect,
     // Search,
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar", "device"]),
+    ...mapGetters(["sidebar", "user_info", "device"]),
   },
   setup() {
     const store = useStore();
@@ -150,20 +140,24 @@ export default defineComponent({
 
   .right-menu {
     float: right;
-    height: 100%;
-    line-height: 50px;
+    // height: 100%;
+    // line-height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     &:focus {
       outline: none;
     }
 
     .right-menu-item {
-      display: inline-block;
+      // display: inline-block;
       padding: 0 8px;
-      height: 100%;
+      // height: 100%;
       font-size: 18px;
       color: #5a5e66;
-      vertical-align: text-bottom;
+      // vertical-align: text-bottom;
 
       &.hover-effect {
         cursor: pointer;
@@ -179,7 +173,7 @@ export default defineComponent({
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
+        // margin-top: 5px;
         position: relative;
 
         .user-avatar {
@@ -187,12 +181,14 @@ export default defineComponent({
           width: 40px;
           height: 40px;
           border-radius: 10px;
+          margin-right: 30px;
         }
 
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
-          right: -20px;
+          // right: -20px;
+          right: 10px;
           top: 25px;
           font-size: 12px;
         }

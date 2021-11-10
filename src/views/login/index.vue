@@ -31,19 +31,26 @@
             />
           </el-form-item>
 
-          <el-form-item label="" prop="password">
-            <el-input
-              v-model="loginForm.password"
-              show-password
-              name="password"
-              tabindex="2"
-              autocomplete="on"
-              placeholder="密码"
-              @keyup="checkCapslock"
-              @blur="capsTooltip = false"
-              @keyup.enter="handleLogin"
-            />
-          </el-form-item>
+          <el-tooltip
+            v-model="capsTooltip"
+            content="大写锁定"
+            placement="right"
+            manual
+          >
+            <el-form-item label="" prop="password">
+              <el-input
+                v-model="loginForm.password"
+                show-password
+                name="password"
+                tabindex="2"
+                autocomplete="on"
+                placeholder="密码"
+                @keyup="checkCapslock"
+                @blur="capsTooltip = false"
+                @keyup.enter="handleLogin"
+              />
+            </el-form-item>
+          </el-tooltip>
 
           <el-form-item label="">
             <el-button
@@ -73,6 +80,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
     const state = reactive({
+      capsTooltip: false,
       loginForm: {
         username: "",
         password: "",
@@ -115,6 +123,11 @@ export default defineComponent({
               });
           }
         });
+      },
+
+      checkCapslock: (e) => {
+        const { key } = e;
+        state.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
       },
     });
 
