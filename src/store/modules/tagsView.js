@@ -1,6 +1,6 @@
 const state = {
   visitedViews: [],
-  cachedViews: []
+  cachedViews: [] // 要缓存的页面
 }
 
 const mutations = {
@@ -68,6 +68,7 @@ const mutations = {
 
 const actions = {
   addView({ dispatch }, view) {
+    console.info(view)
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },

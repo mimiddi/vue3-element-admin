@@ -14,7 +14,7 @@ export const constantRoutes = [
         path: '',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', affix: true }
+        meta: { title: 'dashboard', icon: 'dashboard', affix: true, keepAlive: true }
       }
     ]
   },
@@ -47,7 +47,9 @@ export const asyncRoutes = [
         component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
         name: 'TableIndex',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
-        meta: { title: 'tableList', icon: 'dashboard', access: ['table/index'] }
+        meta: {
+          title: 'tableList', icon: 'dashboard', access: ['table/index'], noCache: true, // 不缓存页面
+        }
       },
       {
         path: 'detail',
@@ -71,7 +73,7 @@ const router = createRouter({
 
 export const resetRouter = () => {
   asyncRoutes.forEach(route => {
-    router.removeRoute(route)
+    router.removeRoute(route.name)
   })
   return router
 }
