@@ -43,9 +43,10 @@ export default ({ command, mode }) => {
       proxy: {
         // 开发模式下，将/dev-api 转成 、/api
         '/dev-api': {
-          target: 'http://xcztc.cn', // 要请求的地址
+          // target: 'http://www.lgb.com', // 要请求的地址
+          target: 'http://localhost:9528', // 要请求的地址
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/dev-api/, '')
+          rewrite: (path) => path.replace(/^\/dev-api/, '/api')
         }
       }
     },
