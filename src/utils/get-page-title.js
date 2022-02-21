@@ -13,5 +13,5 @@ const title = defaultSettings.title || ''
 // }
 
 export default function getPageTitle(key) {
-    return `${title}`
+  return `${title}`
 }

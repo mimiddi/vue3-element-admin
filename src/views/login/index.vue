@@ -3,21 +3,13 @@
     <div class="login-container">
       <div class="login-container__left">
         <div>
-          <div class="login-container__left-title">欢迎登录 好比记SaaS</div>
-          <div class="login-container__left-slogan">
-            人力资源自己的超级工具平台
-          </div>
+          <div class="login-container__left-title">欢迎登录 vue3-admin</div>
+          <div class="login-container__left-slogan">admin slogan</div>
         </div>
       </div>
       <div class="login-container__right">
         <!-- ref 与 model 同名会导致值显示不出来 -->
-        <el-form
-          ref="loginFormRef"
-          :model="loginForm"
-          :rules="loginRules"
-          autocomplete="on"
-          label-width="0"
-        >
+        <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" autocomplete="on" label-width="0">
           <div class="login-container__right-title">欢迎登录</div>
           <el-form-item label="" prop="username">
             <el-input
@@ -31,12 +23,7 @@
             />
           </el-form-item>
 
-          <el-tooltip
-            v-model="capsTooltip"
-            content="大写锁定"
-            placement="right"
-            manual
-          >
+          <el-tooltip v-model="capsTooltip" content="大写锁定" placement="right" manual>
             <el-form-item label="" prop="password">
               <el-input
                 v-model="loginForm.password"
@@ -58,8 +45,7 @@
               type="primary"
               :loading="loading"
               @click.prevent="handleLogin"
-              >登录
-            </el-button>
+            >登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -68,74 +54,74 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, toRefs } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useStore } from "vuex";
-import { ElMessage } from "element-plus";
+import { defineComponent, ref, reactive, toRefs } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
-  name: "Login",
+  name: 'Login',
   setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const store = useStore();
+    const route = useRoute()
+    const router = useRouter()
+    const store = useStore()
     const state = reactive({
       capsTooltip: false,
       loginForm: {
-        username: "",
-        password: "",
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { required: true, message: '请输入密码', trigger: 'blur' },
           {
             min: 6,
             max: 12,
-            message: "长度在 6 到 12 个字符",
-            trigger: "blur",
-          },
-        ],
+            message: '长度在 6 到 12 个字符',
+            trigger: 'blur'
+          }
+        ]
       },
       loading: false, // 提交状态
       loginFormRef: ref(),
       handleLogin: () => {
-        state.loginFormRef.validate(async (valid) => {
+        state.loginFormRef.validate(async(valid) => {
           if (valid) {
-            state.loading = true;
+            state.loading = true
             store
-              .dispatch("user/login", state.loginForm)
+              .dispatch('user/login', state.loginForm)
               .then(({ message }) => {
-                ElMessage.success({ message });
-                const targetPath = decodeURIComponent(route.query.redirect);
-                if (targetPath.startsWith("http")) {
+                ElMessage.success({ message })
+                const targetPath = decodeURIComponent(route.query.redirect)
+                if (targetPath.startsWith('http')) {
                   // 如果是一个url地址
-                  window.location.href = targetPath;
-                } else if (targetPath.startsWith("/")) {
+                  window.location.href = targetPath
+                } else if (targetPath.startsWith('/')) {
                   // 如果是内部路由地址
-                  router.push(targetPath);
+                  router.push(targetPath)
                 } else {
-                  router.push("/");
+                  router.push('/')
                 }
-                state.loading = false;
-              });
+                state.loading = false
+              })
           }
-        });
+        })
       },
 
       checkCapslock: (e) => {
-        const { key } = e;
-        state.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
-      },
-    });
+        const { key } = e
+        state.capsTooltip = key && key.length === 1 && key >= 'A' && key <= 'Z'
+      }
+    })
 
     return {
-      ...toRefs(state),
-    };
-  },
-});
+      ...toRefs(state)
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>

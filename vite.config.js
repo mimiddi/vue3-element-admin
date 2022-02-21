@@ -38,17 +38,17 @@ export default ({ command, mode }) => {
       base: '/',
       host: '0.0.0.0', // --host 显示Network的ip
       port: port,
-      open: true, // --open 运行时打开浏览器
+      open: true // --open 运行时打开浏览器
       // 跨域
-      proxy: {
-        // 开发模式下，将/dev-api 转成 、/api
-        '/dev-api': {
-          // target: 'http://www.lgb.com', // 要请求的地址
-          target: 'http://localhost:9528', // 要请求的地址
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/dev-api/, '/api')
-        }
-      }
+      // proxy: {
+      //   // 开发模式下，将/dev-api 转成 、/api
+      //   '/dev-api': {
+      //     target: 'http://www.lgb.com', // 要请求的地址
+      //     // target: 'http://localhost:9528', // 要请求的地址
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/dev-api/, '/api')
+      //   }
+      // }
     },
     plugins: [
       vue(),
@@ -62,7 +62,7 @@ export default ({ command, mode }) => {
         injectCode: `
           import { setupProdMockServer } from '../mock/_createProductionServer';
           setupProdMockServer();
-        `,
+        `
       }),
 
       // element-ui auto import
@@ -87,17 +87,17 @@ export default ({ command, mode }) => {
       viteSvgIcons({
         // 配置路劲在你的src里的svg存放文件
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
-        symbolId: 'icon-[dir]-[name]',
+        symbolId: 'icon-[dir]-[name]'
       })
     ],
     css: {
       preprocessorOptions: {
         scss: {
           // 全局变量
-          additionalData: '@import "./src/assets/styles/global-variables.scss";',
+          additionalData: '@import "./src/assets/styles/global-variables.scss";'
           // additionalData: `@use "./src/assets/styles/element-variables.scss" as *;`,
-        },
-      },
+        }
+      }
     },
     resolve: {
       alias: {

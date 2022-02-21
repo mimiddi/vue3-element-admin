@@ -53,7 +53,7 @@ export const asyncRoutes = [
         name: 'TableIndex',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
         meta: {
-          title: 'tableList', access: ['table/index'], noCache: true, // 不缓存页面
+          title: 'tableList', access: ['table/index'], noCache: true // 不缓存页面
         }
       },
       {
@@ -62,6 +62,23 @@ export const asyncRoutes = [
         name: 'TableDetail',
         // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
         meta: { title: 'tableDetail', access: ['table/detail'] }
+      }
+    ]
+  },
+  {
+    path: '/read-pdf',
+    component: Layout,
+    name: 'Pdf',
+    meta: { title: 'pdf', icon: 'dashboard', access: ['pdf/index'] },
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "pdf" */ '@/views/pdf/index.vue'),
+        name: 'PdfIndex',
+        // meta: { title: 'table', icon: 'dashboard', role: { 'admin': [], 'visitor': ['table/index'] } }
+        meta: {
+          title: 'pdfList', access: ['pdf/index'], noCache: true // 不缓存页面
+        }
       }
     ]
   },

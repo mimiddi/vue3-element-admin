@@ -17,7 +17,6 @@ import getters from './getters'
 //   return modules
 // }, {})
 
-
 // vite的import.meta.globEager 取代 webpack的require.context 的作用
 // const modulesFiles = import.meta.glob('./modules/*.js')
 const modulesFiles = import.meta.globEager('./modules/*.js')

@@ -1,7 +1,7 @@
 export default [
   // login
   {
-    url: '/vue3-element-admin/user/login',
+    url: '/user/login',
     method: 'post',
     timeout: 1000,
     statusCode: 200,
@@ -13,18 +13,18 @@ export default [
           message: '登录成功',
           data: {
             token: '@word(50, 100)', // @word()是mockjs的语法
-            refresh_token: '@word(50, 100)', // refresh_token是用来重新生成token的
-          },
+            refresh_token: '@word(50, 100)' // refresh_token是用来重新生成token的
+          }
         }
         : {
           code: 40000,
-          message: '密码错误',
+          message: '密码错误'
         }
-    },
+    }
   },
   // getUserInfo
   {
-    url: '/vue3-element-admin/user/info',
+    url: '/user/info',
     method: 'get',
     timeout: 100,
     statusCode: 200,
@@ -43,8 +43,8 @@ export default [
         //   type: 'visitor', // 管理员（普通管理员还需要根据权限表决定显示哪些菜单和页面）
         //   access: ['table/index', 'table/detail', 'table2/index', 'table3/index', 'permission/index', 'permission/edit'], // 权限为结构树生成的自定义权限，返回可配置的权限数组
         // },
-        avatar: "@image('48x48', '#fb0a2a')",
-      },
-    },
-  },
+        avatar: "@image('48x48', '#fb0a2a')"
+      }
+    }
+  }
 ]

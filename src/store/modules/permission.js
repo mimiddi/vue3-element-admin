@@ -1,4 +1,4 @@
-import { constantRoutes, asyncRoutes } from "@/router"
+import { constantRoutes, asyncRoutes } from '@/router'
 import { routeMap, routeChildrenMap } from '@/router/modules/dynamicRoutes' // 根据权限获取动态路由
 
 /**
@@ -79,7 +79,7 @@ export function filterAsyncRoutes(routes, role) {
 // }
 
 const state = {
-  routes: [],
+  routes: []
   // addRoutes: [],
 }
 
@@ -99,7 +99,7 @@ const actions = {
         // 超管
         accessedRoutes = asyncRoutes || []
       } else {
-        // 普通管理员  
+        // 普通管理员
         accessedRoutes = filterAsyncRoutes(asyncRoutes, role)
       }
       // 根据登录角色加载路由
